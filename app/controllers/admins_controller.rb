@@ -1,3 +1,3 @@
-class AdminsController < ActionController::Base
+class AdminsController < ApplicationController
 
 end

@@ -1,4 +1,4 @@
-class BooksController < ActionController::Base
+class BooksController < ApplicationController
   # before_action :authenticate_admin
   before_action :find_book, only: [:edit, :update, :show, :destroy]
 
@@ -24,7 +24,6 @@ class BooksController < ActionController::Base
 
   def new
     @book = Book.new
-
   end
 
   def show
@@ -39,8 +38,8 @@ class BooksController < ActionController::Base
   end
 
   def destroy
-    @book.destroy
-    redirect_to books_path
+     @book.destroy
+     redirect_to books_path
   end
 
   private
