@@ -2,13 +2,12 @@
 
 <p><%= link_to 'Add new Book', new_book_path %></p>
 
-
-
-
-  <%  @books.each do |book| %>
-  <p>
-    <%= link_to(book.title, book_path(book.id)) %>
-    <%= link_to('Edit book', edit_book_path(book.id)) %>
-     <%= link_to('Delete', book_path(book.id), data: {method: :delete, confirm: 'Yes?'}) %>
-  </p>
+  <% if current_user %>
+    <%  @books.each do |book| %>
+    <p>
+      <%= link_to(book.title, book_path(book.id)) %>
+      <%= link_to('Edit book', edit_book_path(book.id)) %>
+       <%= link_to('Delete', book_path(book.id), data: {method: :delete, confirm: 'Yes?'}) %>
+    </p>
+    <% end %>
   <% end %>
