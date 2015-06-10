@@ -10,4 +10,16 @@ class ApplicationController < ActionController::Base
   def current_user
     @admin ||= Admin.find_by(id: session[:admin_id])
   end
+
+  helper_method :current_user
+
+  private
+
+  def authenticate_user
+    unless session[:admin_id].present? && current_user.present?
+      flash[:alert] = 'Sorry, gotta be logged in to do that!'
+      redirect_to login_path
+    end
+  end
+
 end

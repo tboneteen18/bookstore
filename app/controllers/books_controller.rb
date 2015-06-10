@@ -1,8 +1,8 @@
 class BooksController < ApplicationController
-  # before_action :authenticate_admin
   before_action :find_book, only: [:edit, :update, :show, :destroy]
 
   def index
+      @current_user ||= Admin.where(id: session[:user_id]).first
       @books = Book.all
   end
 
