@@ -1,7 +1,7 @@
 <h1>Books</h1>
 <p id="notice"><%= notice %></p>
 
-<% if @current_user %>
+<% if logged_in? %>
   <p><%= link_to 'Add new Book', new_book_path %></p>
 <% end %>
 
@@ -9,10 +9,9 @@
     <%  @books.each do |book| %>
     <p>
       <%= link_to(book.title, book_path(book.id)) %>
-      <% if @current_user %>
+      <% if logged_in? %>
         <%= link_to('Edit book', edit_book_path(book.id)) %>
         <%= link_to('Delete', book_path(book.id), data: {method: :delete, confirm: 'Yes?'}) %>
        <% end %>
     </p>
     <% end %>
-

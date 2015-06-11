@@ -1,38 +1,27 @@
 class AdminsController < ApplicationController
 
   def create
-    @admin = Admin.new(params[:username])
-    @admin.password = params[:password]
+    @admin = Admin.new(user_params)
     if @admin.save
-      give_token
-      flash[:notice] = 'You are logged in'
-      redirect_to book_path
+    flash[:success] = "Welcome to your Bookstore!"
+    redirect_to books_path
     else
-      render :new
+      render 'new'
     end
+  end
+
+  def edit
   end
 
   def index
-
-  end
-
-  def show
-
-  end
-
-  def login
-    @admin = Admin.find_by_username(params[:username])
-    if @admin.password == params[:password]
-      give_token
-      redirect_to books_path
-    else
-      redirect_to admins_path
-    end
   end
 
   def new
     @admin = Admin.new
+  end
 
+  def show
+    @admin = Admin.find(params[:id])
   end
 
   def signup
@@ -46,4 +35,11 @@ class AdminsController < ApplicationController
       # take them back to the login page
     end
   end
+
+  def user_params
+    params.require(:admin).permit(:username, :password,
+                                  :password_confirmation)
+  end
+
+
 end
